@@ -46,17 +46,13 @@ class CrearMeme : AppCompatActivity() {
             })
         binding.anadirTag.setOnClickListener{
             tagString += " "+(binding.spinner.selectedItem as TagGet).id()+" ,"
-            println(tagString)
         }
 
         binding.crearMeme.setOnClickListener{
             if(tagString.length>0) {
-                println(tagString)
                 tagString = tagString.substring(0, tagString.length - 1)
-                println(tagString)
             }else {
                 tagString = " 1 "
-                println(tagString+" <=0")
             }
             val meme: MemePost = MemePost( binding.nombre.text.toString(), binding.titSup.text.toString(),
             binding.titInf.text.toString(), binding.url.text.toString(), tagString)
