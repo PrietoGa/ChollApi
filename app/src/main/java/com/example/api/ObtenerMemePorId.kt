@@ -1,5 +1,6 @@
 package com.example.api
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -10,6 +11,7 @@ import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.Serializable
 
 class ObtenerMemePorId : AppCompatActivity() {
 
@@ -20,7 +22,10 @@ class ObtenerMemePorId : AppCompatActivity() {
         binding = ActivityObtenerMemePorIdBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
+        val meme: Meme? = intent.getSerializableExtra("meme") as Meme?
+        if(meme!=null){
+            render(meme)
+        }
         binding.imprimirMeme.setOnClickListener{
             renderMeme()
         }
@@ -48,6 +53,15 @@ class ObtenerMemePorId : AppCompatActivity() {
                      Toast.makeText(context, "ERROR AL CARGAR LA PAGINA", Toast.LENGTH_SHORT).show()
                  }
              })
+    }
+    fun render(meme:Meme){
+        binding.tituloSup.text = meme.tituloSup
+        binding.tituloInf.text = meme.tituloInf
+        binding.nombreMeme.text = meme.nombre
+        if(meme.url!="")
+            Picasso.get().load(meme.url).into(binding.imageView)
+        else
+            binding.imageView.setImageResource(R.drawable.ic_launcher_foreground)
     }
 
 }
