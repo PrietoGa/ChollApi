@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.api.databinding.ActivityObtenerMemePorIdBinding
 import com.example.api.model.Meme
-import com.example.api.model.MemePost
 import com.example.api.retrofit.MyApiAdapter
 import com.squareup.picasso.Picasso
 import retrofit2.Call
@@ -21,25 +20,19 @@ class ObtenerMemePorId : AppCompatActivity() {
         binding = ActivityObtenerMemePorIdBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        var meme:Meme? = null
-        try {
-            meme = intent.getSerializableExtra("meme") as Meme
-        }catch (e:Exception ){
-
+        var id:Int = intent.getIntExtra("id", -1)
+        if(id!=null && id!=-1){
+            renderMeme("$id")
         }
 
-        if(meme!=null){
-            render(meme)
-            print(meme)
-        }
+
         binding.imprimirMeme.setOnClickListener{
             renderMeme()
         }
 
     }
 
-    fun renderMeme(){
-        val id = binding.idMeme.text.toString()
+    fun renderMeme(id: String = binding.idMeme.text.toString()){
          adapter.getApiService()!!.getMemeById("/meme?id=$id")!!
              .enqueue(object : Callback<Meme?> {
                  override fun onResponse(call: Call<Meme?>, response: Response<Meme?>) {
@@ -71,3 +64,5 @@ class ObtenerMemePorId : AppCompatActivity() {
     }
 
 }
+
+

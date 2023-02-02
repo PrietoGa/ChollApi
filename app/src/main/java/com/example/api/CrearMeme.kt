@@ -66,7 +66,7 @@ class CrearMeme : AppCompatActivity() {
                         Toast.makeText(this@CrearMeme, "Meme creado", Toast.LENGTH_SHORT).show()
                         println(response.body())
                         startActivity(Intent(this@CrearMeme, ObtenerMemePorId::class.java).apply {
-                            putExtra("meme", response.body())
+                            putExtra("id", response.body()?.id)
                         })
                     }
 
