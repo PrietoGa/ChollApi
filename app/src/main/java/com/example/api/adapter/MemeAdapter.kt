@@ -2,7 +2,6 @@ package com.example.api.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.api.R
 import com.example.api.model.Meme

@@ -1,6 +1,5 @@
 package com.example.api.adapter
 
-import android.media.Image
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -15,6 +14,9 @@ class MemeViewHolder(val v: View):RecyclerView.ViewHolder(v) {
         v.findViewById<TextView>(R.id.cardTituloSup).text = meme.tituloSup
         v.findViewById<TextView>(R.id.cardTituloInf).text = meme.tituloInf
         v.findViewById<TextView>(R.id.cardNombreMeme).text = meme.nombre
-        Picasso.get().load(meme.url).into(v.findViewById<ImageView>(R.id.cardImageView))
+        if(meme.url!="")
+            Picasso.get().load(meme.url).into(v.findViewById<ImageView>(R.id.cardImageView))
+        else
+            v.findViewById<ImageView>(R.id.cardImageView).setImageResource(R.drawable.ic_launcher_foreground)
     }
 }
